@@ -11,4 +11,12 @@ public interface TaskRepo extends JpaRepository<Task, Long> {
 	List<Task> findTaskByName(String name);
 
 	List<Task> findTaskByDescription(String description);
+
+	/*
+	 * @Query(value = "SELECT * FROM task WHERE name = 'Say Hello';", nativeQuery =
+	 * true) List<Task> findTaskBySearchName(String search);
+	 * 
+	 * @Query(value = "SELECT * FROM task WHERE name = 'Say Hello';", nativeQuery =
+	 * true) List<Task> findTaskBySearchDescription(String search);
+	 */
 }

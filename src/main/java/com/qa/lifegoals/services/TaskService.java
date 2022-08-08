@@ -41,15 +41,13 @@ public class TaskService {
 		return existingTask;
 	}
 
-	public List<Task> searchByName(String name) {
-
-		return repo.findTaskByName(name);
-	}
-
-	public List<Task> searchByDescription(String description) {
-
-		return repo.findTaskByDescription(description);
-	}
+	/*
+	 * public List<Task> searchByName(String name) { return
+	 * repo.findTaskBySearchName("a"); }
+	 * 
+	 * public List<Task> searchByDescription(String description) { return
+	 * repo.findTaskBySearchDescription("a"); }
+	 */
 
 	// UPDATE
 	public Task updateTask(Long id, Task task) {

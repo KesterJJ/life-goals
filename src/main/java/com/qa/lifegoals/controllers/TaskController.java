@@ -48,25 +48,20 @@ public class TaskController {
 		return service.getOneTask(id);
 	}
 
-	@GetMapping("/search/{search}")
-	public List<Task> search(@PathParam("search") String search) {
-		if (service.searchByName(search).size() >= 1) {
-			return service.searchByName(search);
-		}
-		if (service.searchByDescription(search).size() >= 1) {
-			return service.searchByName(search);
-		} else {
-			return null;
-		}
-	}
+	/*
+	 * @GetMapping("/search") public List<Task> search(@PathParam("search") String
+	 * search) { if (service.searchByName("a").size() >= 1) { return
+	 * service.searchByName("a"); } else if (service.searchByDescription("a").size()
+	 * >= 1) { return service.searchByName("a"); } else { return null; } }
+	 */
 
 	@PatchMapping("/update")
-	public Task update(@PathParam("id") Long i, @RequestBody Task tsk) {
+	public Task update(@PathParam("id") Long id, @RequestBody Task task) {
 		return service.updateTask(id, task);
 	}
 
 	@DeleteMapping("/delete")
-	public boolean delete(@PathParam("id") Long i) {
+	public boolean delete(@PathParam("id") Long id) {
 		return service.removeTask(id);
 	}
 
