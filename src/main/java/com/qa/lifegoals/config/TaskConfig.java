@@ -13,7 +13,7 @@ import com.qa.lifegoals.repositories.TaskRepo;
 public class TaskConfig {
 
 	@Bean
-	CommandLineRunner commandLineRunner(TaskRepo repo) {
+	CommandLineRunner commandRunner(TaskRepo repo) {
 		return args -> {
 			Task sayHello = new Task("Say Hello", "Howdeedoodee");
 			Task sayBye = new Task("Say Bye", "See ya");
@@ -21,4 +21,5 @@ public class TaskConfig {
 		};
 
 	}
+
 }

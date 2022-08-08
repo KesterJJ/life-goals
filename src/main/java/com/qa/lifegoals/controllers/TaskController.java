@@ -17,6 +17,11 @@ import com.qa.lifegoals.dtos.TaskDTO;
 import com.qa.lifegoals.entities.Task;
 import com.qa.lifegoals.services.TaskService;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 @RestController
 public class TaskController {
 
@@ -28,18 +33,18 @@ public class TaskController {
 		return "<h2>HI</h2>";
 	}
 
-	@PostMapping("/create")
+	@PostMapping("/createTask")
 	public Task create(@RequestBody Task task) {
 		return service.addTask(task);
 	}
 
 	// READ
-	@GetMapping("/getAll")
+	@GetMapping("/getAllTasks")
 	public List<TaskDTO> getAll() {
 		return this.service.getAllTasks();
 	}
 
-	@GetMapping("/getOne/{id}")
+	@GetMapping("/getOneTask/{id}")
 	public Task getOne(@PathVariable("id") Long id) {
 		return service.getOneTask(id);
 	}
@@ -52,12 +57,12 @@ public class TaskController {
 	 * >= 1) { return service.searchByName("a"); } else { return null; } }
 	 */
 
-	@PatchMapping("/update")
+	@PatchMapping("/updateTask")
 	public Task update(@PathParam("id") Long id, @RequestBody Task task) {
 		return service.updateTask(id, task);
 	}
 
-	@DeleteMapping("/delete")
+	@DeleteMapping("/deleteTask")
 	public boolean delete(@PathParam("id") Long id) {
 		return service.removeTask(id);
 	}

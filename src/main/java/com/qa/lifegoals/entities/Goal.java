@@ -6,8 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.springframework.lang.NonNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,13 +16,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Goal {
 
+	public Goal(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
+
 	@Id
-	@NonNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(nullable = false, unique = true)
-	@NonNull
 	private String name;
 
 	@Column
