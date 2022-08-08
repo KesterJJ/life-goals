@@ -18,6 +18,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EndUser {
 
+	public EndUser(String name) {
+		this.name = name;
+	}
+
 	@Id
 	@NonNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
