@@ -20,10 +20,6 @@ import com.qa.lifegoals.services.TaskService;
 @RestController
 public class TaskController {
 
-	Long id = 3L;
-
-	Task task = new Task("yo", "bud");
-
 	@Autowired
 	private TaskService service;
 
