@@ -1,7 +1,26 @@
 package com.qa.lifegoals.dtos;
 
-import javax.persistence.Entity;
+import com.qa.lifegoals.entities.Task;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TaskDTO {
+
+	private Long id;
+
+	private String name;
+
+	private String description;
+
+	public TaskDTO(Task task) {
+		this.id = task.getId();
+		this.name = task.getName();
+		this.description = task.getDescription();
+	}
 
 }
