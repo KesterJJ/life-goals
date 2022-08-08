@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Goal {
+public class EndUser {
 
 	@Id
 	@NonNull
@@ -26,8 +26,5 @@ public class Goal {
 	@Column(nullable = false, unique = true)
 	@NonNull
 	private String name;
-
-	@Column
-	private String description;
 
 }
