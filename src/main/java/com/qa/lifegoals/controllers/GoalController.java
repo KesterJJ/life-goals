@@ -23,18 +23,18 @@ public class GoalController {
 	@Autowired
 	private GoalService service;
 
-	@PostMapping("/create")
+	@PostMapping("/createGoal")
 	public Goal create(@RequestBody Goal goal) {
 		return service.addGoal(goal);
 	}
 
 	// READ
-	@GetMapping("/getAll")
+	@GetMapping("/getAllGoals")
 	public List<GoalDTO> getAll() {
 		return this.service.getAllGoals();
 	}
 
-	@GetMapping("/getOne/{id}")
+	@GetMapping("/getOneGoal/{id}")
 	public Goal getOne(@PathVariable("id") Long id) {
 		return service.getOneGoal(id);
 	}
@@ -47,12 +47,12 @@ public class GoalController {
 	 * >= 1) { return service.searchByName("a"); } else { return null; } }
 	 */
 
-	@PatchMapping("/update")
+	@PatchMapping("/updateGoal")
 	public Goal update(@PathParam("id") Long id, @RequestBody Goal goal) {
 		return service.updateGoal(id, goal);
 	}
 
-	@DeleteMapping("/delete")
+	@DeleteMapping("/deleteGoal")
 	public boolean delete(@PathParam("id") Long id) {
 		return service.removeGoal(id);
 	}
