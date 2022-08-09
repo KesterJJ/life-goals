@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+header {
+    background-color: brown;
+    width: 100vw;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: yellow;
+    font-size:10vh;
+ }
+
+ main {
+    background-color: lightcoral;
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+ }
+
+ #user {
+    background-color: brown;
+    width: 20vw;
+    height: 100%;
+    position: relative;
+ }
+
+ #goals {
+    width: 80vw;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+ }
+
+#goalsBox {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    row-gap: 4%;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.goalBox {
+    width: 80%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    border: 5px solid black;
+    border-radius: 10%;
+    overflow: hidden;
+ }
+
+ .goalTitleBox {
+    height: 50%;
+    width: 100%;
+    background-color: brown;
+ }
+ h3 {
+    color: yellow;
+ }
+
+ .goalDescriptionBox {
+    height: 50%;
+    width: 100%;
+    background-color: lightcoral;
+ }
+
+ .goalDescriptionBox>p {
+    font-style: italic;
+ }
+
+
+
+
+
+ #userInfoButton {
+ bottom: 10%;
+ left: 10%;
+ z-index: 8;
+ }
+
+ #buttonsBox {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: space-around;
+ }
+
+ #viewGoalsButton {
+    bottom: 10%;
+    right: 40%;
+    z-index: 10;
+ }
+
+ #createGoalButton {
+    bottom: 10%;
+    right: 10%;
+    z-index: 9;
+ }
+
