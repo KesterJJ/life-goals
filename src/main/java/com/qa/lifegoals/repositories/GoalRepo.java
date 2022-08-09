@@ -9,9 +9,9 @@ import com.qa.lifegoals.entities.Goal;
 
 public interface GoalRepo extends JpaRepository<Goal, Long> {
 
-	List<Goal> findGoalByName(String name);
+	List<Goal> findGoalByGoalName(String goalName);
 
-	List<Goal> findGoalByDescription(String description);
+	List<Goal> findGoalByGoalDescription(String goalDescription);
 
 	@Query(value = "SELECT * FROM Goal WHERE name = 'Say Hello';", nativeQuery = true)
 	List<Goal> findGoalBySearchName(String search);

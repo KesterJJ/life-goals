@@ -12,18 +12,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TaskDTO {
 
-	private Long id;
+	private Long taskId;
 
-	private String name;
+	private String taskName;
 
-	private String description;
+	private String taskDescription;
 
 	private Goal goal;
 
 	public TaskDTO(Task task) {
-		this.id = task.getId();
-		this.name = task.getName();
-		this.description = task.getDescription();
+		this.taskId = task.getTaskId();
+		this.taskName = task.getTaskName();
+		this.taskDescription = task.getTaskDescription();
 		this.goal = task.getGoal();
 	}
 

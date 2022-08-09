@@ -34,9 +34,9 @@ public class GoalController {
 		return this.service.getAllGoals();
 	}
 
-	@GetMapping("/getOneGoal/{id}")
-	public Goal getOne(@PathVariable("id") Long id) {
-		return service.getOneGoal(id);
+	@GetMapping("/getOneGoal/{goalId}")
+	public Goal getOne(@PathVariable("goalId") Long goalId) {
+		return service.getOneGoal(goalId);
 	}
 
 	/*
@@ -48,12 +48,12 @@ public class GoalController {
 	 */
 
 	@PatchMapping("/updateGoal")
-	public Goal update(@PathParam("id") Long id, @RequestBody Goal goal) {
-		return service.updateGoal(id, goal);
+	public Goal update(@PathParam("goalId") Long goalId, @RequestBody Goal goal) {
+		return service.updateGoal(goalId, goal);
 	}
 
 	@DeleteMapping("/deleteGoal")
-	public boolean delete(@PathParam("id") Long id) {
-		return service.removeGoal(id);
+	public boolean delete(@PathParam("goalId") Long goalId) {
+		return service.removeGoal(goalId);
 	}
 }

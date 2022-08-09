@@ -20,9 +20,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Goal {
 
-	public Goal(String name, String description) {
-		this.name = name;
-		this.description = description;
+	public Goal(String goalName, String goalDescription) {
+		this.goalName = goalName;
+		this.goalDescription = goalDescription;
 	}
 
 	@Id
@@ -30,10 +30,10 @@ public class Goal {
 	private Long goalId;
 
 	@Column(nullable = false, unique = true)
-	private String name;
+	private String goalName;
 
 	@Column
-	private String description;
+	private String goalDescription;
 
 	@OneToMany(mappedBy = "goal")
 	private Set<Task> tasks = new HashSet<>();

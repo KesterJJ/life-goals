@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GoalDTO {
 
-	private Long id;
+	private Long goalId;
 
-	private String name;
+	private String goalName;
 
-	private String description;
+	private String goalDescription;
 
 	public GoalDTO(Goal goal) {
-		this.id = goal.getGoalId();
-		this.name = goal.getName();
-		this.description = goal.getDescription();
+		this.goalId = goal.getGoalId();
+		this.goalName = goal.getGoalName();
+		this.goalDescription = goal.getGoalDescription();
 	}
 }
