@@ -18,7 +18,7 @@ public class GoalDTO {
 	private String description;
 
 	public GoalDTO(Goal goal) {
-		this.id = goal.getId();
+		this.id = goal.getGoalId();
 		this.name = goal.getName();
 		this.description = goal.getDescription();
 	}

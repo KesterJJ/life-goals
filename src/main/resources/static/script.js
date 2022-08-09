@@ -16,6 +16,7 @@
             console.log(goals[i]);
             let goalBox = document.createElement("div");
             goalBox.classList.add("goalBox");
+            goalBox.addEventListener("click", function() {openGoal(goalBox, goals[i]);});
 
             let goalTitleBox = document.createElement("div");
             goalTitleBox.classList.add("goalTitleBox");
@@ -45,7 +46,7 @@
     getAllGoals = () => {
 
         fetch("/getAllGoals", { method: "GET" })
-            .then(res => res.json().then(body => console.log(createGoalBoxes(body))))
+            .then(res => res.json().then(body => createGoalBoxes(body)))
             .catch(err => console.error(err + "WAGUAN"));
     }
     function handleForm(event) { event.preventDefault(); }
@@ -110,4 +111,39 @@
             .then(res => res.json().then(body => console.log(body)))
             .catch(err => console.error(err + "WAGUAN"));
     }
+
+
+    getTasks = (goalBox, goal) => {
+        console.log(goal.id);
+        fetch(`/getAllTasks/${goal.id}`, {
+            method: "GET"})
+            .then(res => res.json().then(body => console.log(body)))
+            .catch(err => console.error(err + "WAGUAN"));
+    }
+
+    openGoal = (goalBox, goal) => {
+        goalBox.style.height = "60vh";
+        console.log("openGoal"); 
+        getTasks(goalBox, goal);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 })();

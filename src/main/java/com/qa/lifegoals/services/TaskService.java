@@ -31,8 +31,8 @@ public class TaskService {
 	}
 
 	// READ
-	public List<TaskDTO> getAllTasks() {
-		return repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
+	public List<TaskDTO> getAllTasks(Long goalId) {
+		return repo.findAllByGoalId(1L).stream().map(this::mapToDTO).collect(Collectors.toList());
 	}
 
 	public Task getOneTask(Long id) {

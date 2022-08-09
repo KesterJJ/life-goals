@@ -1,5 +1,6 @@
 package com.qa.lifegoals.dtos;
 
+import com.qa.lifegoals.entities.Goal;
 import com.qa.lifegoals.entities.Task;
 
 import lombok.AllArgsConstructor;
@@ -17,10 +18,13 @@ public class TaskDTO {
 
 	private String description;
 
+	private Goal goal;
+
 	public TaskDTO(Task task) {
 		this.id = task.getId();
 		this.name = task.getName();
 		this.description = task.getDescription();
+		this.goal = task.getGoal();
 	}
 
 }
