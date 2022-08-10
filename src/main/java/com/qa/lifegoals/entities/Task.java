@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,6 +41,7 @@ public class Task {
 	private String taskDescription;
 
 	@ManyToOne
+	@NotNull
 	@JoinColumn(name = "goal_id")
 	private Goal goal;
 

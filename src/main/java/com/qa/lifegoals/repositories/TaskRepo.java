@@ -22,4 +22,8 @@ public interface TaskRepo extends JpaRepository<Task, Long> {
 	@Query(value = "SELECT * FROM task WHERE name = 'Say Hello';", nativeQuery = true)
 	List<Task> findTaskBySearchDescription(String search);
 
+	// @Query(value = "INSERT INTO TASK (task_name, task_description, goal_id)
+	// VALUES (?1, ?2, ?3)")
+	// Task saveTaskByGoalId(String taskName, String taskDescription, Long goalId);
+
 }

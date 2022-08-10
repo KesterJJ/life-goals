@@ -1,14 +1,10 @@
 package com.qa.lifegoals.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,8 +30,5 @@ public class Goal {
 
 	@Column
 	private String goalDescription;
-
-	@OneToMany(mappedBy = "goal")
-	private Set<Task> tasks = new HashSet<>();
 
 }
