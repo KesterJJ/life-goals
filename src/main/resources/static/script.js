@@ -10,6 +10,21 @@
     const goalsBox = document.getElementById("goalsBox");
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+    //READ FUNCTIONS
+
+
     const createGoalBoxes = (goals) => {
         goalsBox.innerHTML = "";
         for (let i in goals) {
@@ -28,13 +43,13 @@
 
 
             let goalTitle = document.createElement("h3");
-            goalTitle.innerHTML = goals[i].name;
+            goalTitle.innerHTML = goals[i].goalName;
 
-            let goalDescription = document.createElement("p");
-            goalDescription.innerHTML = goals[i].description;
+            let goalDesc = document.createElement("p");
+            goalDesc.innerHTML = goals[i].goalDescription;
 
             goalTitleBox.appendChild(goalTitle);
-            goalDescriptionBox.appendChild(goalDescription);
+            goalDescriptionBox.appendChild(goalDesc);
 
             goalBox.appendChild(goalTitleBox);
             goalBox.appendChild(goalDescriptionBox);
@@ -49,6 +64,24 @@
             .then(res => res.json().then(body => createGoalBoxes(body)))
             .catch(err => console.error(err + "WAGUAN"));
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //CREATE GOAL FUNCTIONS
+
     function handleForm(event) { event.preventDefault(); }
 
     createCreateForm = () => {
@@ -101,8 +134,8 @@
             method: "POST",
             body: JSON.stringify(
                 {
-                    "name": `${name}`,
-                    "description": `${description}`
+                    "goalName": `${name}`,
+                    "goalDescription": `${description}`
                 }
             ),
             headers: {
@@ -113,17 +146,64 @@
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //READ TASKS FUNCTIONS
+
+    createTaskBoxes = (goalBox, tasks) => {
+        for (let i in tasks) {
+            console.log(tasks[i].taskName, tasks[i].taskDescription);
+            let taskBox = document.createElement("div");
+            taskBox.classList.add("taskBox");
+
+            let taskTitleBox = document.createElement("div");
+            taskTitleBox.classList.add("taskTitleBox");
+            taskTitleBox.classList.add("centeredContent");
+
+            let taskDescriptionBox = document.createElement("div");
+            taskDescriptionBox.classList.add("taskDescriptionBox");
+            taskDescriptionBox.classList.add("centeredContent");
+
+
+            let taskTitle = document.createElement("h4");
+            taskTitle.innerHTML = tasks[i].taskName;
+
+            let taskDesc = document.createElement("p");
+            taskDesc.innerHTML = tasks[i].taskDescription;
+
+            taskTitleBox.appendChild(taskTitle);
+            taskDescriptionBox.appendChild(taskDesc);
+
+            taskBox.appendChild(taskTitleBox);
+            taskBox.appendChild(taskDescriptionBox);
+
+            goalBox.appendChild(taskBox);
+        }
+    }
+
     getTasks = (goalBox, goal) => {
-        console.log(goal.id);
-        fetch(`/getAllTasks/${goal.id}`, {
+        goalBox = goalBox;
+        fetch(`/getAllTasks/${goal.goalId}`, {
             method: "GET"})
-            .then(res => res.json().then(body => console.log(body)))
+            .then(res => res.json().then((goalBox, body) => createTaskBoxes(goalBox, body)))
             .catch(err => console.error(err + "WAGUAN"));
+
     }
 
     openGoal = (goalBox, goal) => {
         goalBox.style.height = "60vh";
-        console.log("openGoal"); 
+        console.log("openGoal");
         getTasks(goalBox, goal);
     }
 

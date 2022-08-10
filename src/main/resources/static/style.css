@@ -21,11 +21,10 @@ header {
 }
 
 h1 {
-   color: yellow;
    font-size: 10vh;
 }
 
-h2 {
+h1, h2, h3, h4, h5 {
    color: yellow;
 }
 
@@ -83,9 +82,6 @@ main {
    background-color: brown;
 }
 
-h3 {
-   color: yellow;
-}
 
 .goalDescriptionBox {
    height: 6vh;
@@ -160,3 +156,36 @@ form {
    justify-content: space-around;
 }
 
+
+
+
+
+.taskBox {
+   width: 80%;
+   height: 10vh;
+   display: flex;
+   flex-shrink: 0;
+   flex-direction: column;
+   justify-content: flex-start;
+   row-gap: 5%;
+   cursor: pointer;
+   border: 2px dotted grey;
+   overflow: hidden;
+}
+
+.taskTitleBox {
+   height: 5vh;
+   width: 100%;
+   background-color: brown;
+}
+
+
+.taskDescriptionBox {
+   height: 5vh;
+   width: 100%;
+   background-color: lightcoral;
+}
+
+.taskDescriptionBox>p {
+   font-style: italic;
+}
