@@ -22,7 +22,7 @@
 
 
 
-    //READ FUNCTIONS
+    //READ GOAL FUNCTIONS
 
 
     const createGoalBoxes = (goals) => {
@@ -33,11 +33,17 @@
             goalBox.classList.add("goalBox", "centeredColumn");
             goalBox.addEventListener("click", function click() {
                 goalBox.removeEventListener("click", click);
-                openGoal(goalBox, goals[i])});
+                openGoal(goalBox, goals[i])
+            });
 
             let goalTitleBox = document.createElement("div");
             goalTitleBox.classList.add("goalTitleBox");
             goalTitleBox.classList.add("centeredContent");
+
+            let deleteButton = document.createElement("button");
+            deleteButton.innerHTML = "Delete";
+            deleteButton.onclick = function () { deleteGoal(goals[i]).then(function() {getAllGoals()}) };
+
 
             let goalDescriptionBox = document.createElement("div");
             goalDescriptionBox.classList.add("goalDescriptionBox");
@@ -51,6 +57,7 @@
             goalDesc.innerHTML = goals[i].goalDescription;
 
             goalTitleBox.appendChild(goalTitle);
+            goalTitleBox.appendChild(deleteButton);
             goalDescriptionBox.appendChild(goalDesc);
 
             goalBox.appendChild(goalTitleBox);
@@ -115,7 +122,7 @@
         submitButton.setAttribute("type", "submit");
         submitButton.setAttribute("value", "Submit");
         submitButton.innerHTML = "Create";
-        submitButton.onclick = function() {createGoal(title.value, description.value)};
+        submitButton.onclick = function () { createGoal(title.value, description.value) };
 
         form.appendChild(titleLabel)
         form.appendChild(title);
@@ -142,10 +149,36 @@
             ),
             headers: {
                 "Content-Type": "application/json"
-            }})
+            }
+        })
             .then(res => res.json().then(body => console.log(body)))
             .catch(err => console.error(err + "WAGUAN"));
     }
+
+
+
+
+
+
+
+
+    //DELETE GOAL FUNCTIONS
+
+    async function deleteGoal(goal) {
+        console.log("delete goal called", goal.goalId);
+        response = await fetch(`/deleteGoal/${goal.goalId}`, {
+            method: "DELETE"
+        })
+            .then(res => console.log(res))
+            .catch(err => console.error(err + "WAGUAN"));
+
+        return response;
+    }
+
+
+
+
+
 
 
 
@@ -170,9 +203,19 @@
             let taskBox = document.createElement("div");
             taskBox.classList.add("taskBox", "centeredColumn");
 
+            let deleteButton = document.createElement("button");
+            deleteButton.innerHTML = "Delete";
+            deleteButton.onclick = function () { deleteTask(tasks[i]) };
+
+            let editButton = document.createElement("button");
+            editButton.innerHTML = "Edit";
+
             let taskTitleBox = document.createElement("div");
             taskTitleBox.classList.add("taskTitleBox");
             taskTitleBox.classList.add("centeredContent");
+            taskTitleBox.appendChild(deleteButton);
+            taskTitleBox.appendChild(editButton);
+
 
             let taskDescriptionBox = document.createElement("div");
             taskDescriptionBox.classList.add("taskDescriptionBox");
@@ -185,6 +228,11 @@
             let taskDesc = document.createElement("p");
             taskDesc.innerHTML = tasks[i].taskDescription;
 
+
+       
+            editButton.onclick = function () { editTask(tasks[i], taskBox, taskTitleBox, taskDescriptionBox, taskTitle, taskDesc, editButton)};
+
+
             taskTitleBox.appendChild(taskTitle);
             taskDescriptionBox.appendChild(taskDesc);
 
@@ -195,19 +243,21 @@
         }
     }
 
-        async function fetchTasks(goal, tasksBox) {
-        const response = await  fetch(`/getAllTasks/${goal.goalId}`, {
-            method: "GET"})
+    async function fetchTasks(goal, tasksBox) {
+        const response = await fetch(`/getAllTasks/${goal.goalId}`, {
+            method: "GET"
+        })
             .then(res => res.json().then(body => {
                 console.log(body);
                 createTaskBoxes(tasksBox, body);
             }))
-           .catch(err => console.error(err + "WAGUAN"));
-            return response;
-        }
-    
+            .catch(err => console.error(err + "WAGUAN"));
+        return response;
+    }
+
 
     openGoal = (goalBox, goal) => {
+        console.log("openGoal called");
         goalBox.style.height = "60vh";
         let listTitleBox = document.createElement("div");
         listTitleBox.classList.add("listTitleBox");
@@ -216,7 +266,7 @@
 
         listTitleBox.appendChild(listTitle);
 
-    
+
         let tasksBox = document.createElement("div");
         tasksBox.classList.add("tasksBox", "centeredColumn");
 
@@ -225,7 +275,7 @@
 
         let addTaskButton = document.createElement("button");
         addTaskButton.innerHTML = "Create Task";
-        addTaskButtonBox.onclick = function() {createCreateTaskForm(tasksBox, goal);};
+        addTaskButtonBox.onclick = function () { createCreateTaskForm(tasksBox, goal) };
 
         addTaskButtonBox.appendChild(addTaskButton);
 
@@ -236,13 +286,21 @@
 
 
         fetchTasks(goal, tasksBox);
+        console.log("Open Goal complete");
     }
 
 
 
 
 
-    
+
+
+
+
+
+
+    //CREATE TASK FUNCTIONS
+
 
     createCreateTaskForm = (tasksBox, goal) => {
         let newTaskBox = document.createElement("div");
@@ -273,7 +331,7 @@
         submitButton.setAttribute("type", "submit");
         submitButton.setAttribute("value", "Submit");
         submitButton.innerHTML = "Create";
-        submitButton.onclick = function() {createTask(title.value, description.value, goal)};
+        submitButton.onclick = function () { createTask(title.value, description.value, goal) };
 
         form.appendChild(titleLabel)
         form.appendChild(title);
@@ -288,12 +346,8 @@
     }
 
 
-
-
-
-
-
     createTask = (name, description, goal) => {
+
 
         console.log(JSON.stringify(goal));
         fetch("/createTask", {
@@ -307,14 +361,89 @@
             ),
             headers: {
                 "Content-Type": "application/json"
-            }})
+            }
+        })
             .then(res => res.json().then(body => console.log(body)))
             .catch(err => console.error(err + "WAGUAN"));
+
+        getAllGoals();
 
     }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+    //UPDATE TASK FUNCTIONS
+
+    editTask = (task, taskBox, taskTitleBox, taskDescriptionBox, taskTitle, taskDescription, editButton) => {
+
+        let titleEditor = document.createElement("input");
+        let descriptionEditor = document.createElement("input");
+
+
+        titleEditor.value = taskTitle.innerHTML;
+        taskTitleBox.removeChild(taskTitle);
+        taskTitleBox.appendChild(titleEditor);
+
+        descriptionEditor.value = taskDescription.innerHTML;
+        taskDescriptionBox.removeChild(taskDescription);
+        taskDescriptionBox.appendChild(descriptionEditor);
+
+        editButton.innerHTML = "UPDATE";
+        editButton.onclick = function() {updateTask(task, taskBox, titleEditor.value, descriptionEditor.value)};
+    }
+
+
+
+
+
+updateTask = (task, taskBox, name, description) => {
+    fetch(`/updateTask/${task.taskId}`, {
+        method: "PATCH",
+        body: JSON.stringify(
+            {
+                "taskName": `${name}`,
+                "taskDescription": `${description}`,
+              //  "goal": goal
+            }
+        ),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(res => res.json().then(body => console.log(body)))
+        .catch(err => console.error(err + "WAGUAN"));
+
+        getAllGoals();
+}
+
+
+
+
+
+
+    //DELETE TASKS FUNCTIONS
+
+    deleteTask = (task) => {
+        console.log("delete task called", task.taskId);
+        fetch(`/deleteTask/${task.taskId}`, {
+            method: "DELETE"
+        })
+            .then(res => console.log(res))
+            .catch(err => console.error(err + "WAGUAN"));
+
+        getAllGoals();
+    }
 
 
 

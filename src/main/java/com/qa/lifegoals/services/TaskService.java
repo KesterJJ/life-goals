@@ -61,9 +61,9 @@ public class TaskService {
 	}
 
 	// DELETE
-	public boolean removeTask(Long id) {
-		repo.deleteById(id);
-		boolean exists = this.repo.existsById(id);
+	public boolean removeTask(Long taskId) {
+		repo.deleteById(taskId);
+		boolean exists = this.repo.existsById(taskId);
 		return !exists;
 	}
 }

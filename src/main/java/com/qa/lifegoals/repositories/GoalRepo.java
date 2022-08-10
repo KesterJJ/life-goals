@@ -18,4 +18,8 @@ public interface GoalRepo extends JpaRepository<Goal, Long> {
 
 	@Query(value = "SELECT * FROM Goal WHERE name = 'Say Hello';", nativeQuery = true)
 	List<Goal> findGoalBySearchDescription(String search);
+
+	void deleteByGoalId(Long goalId);
+
+	boolean existsByGoalId(Long goalId);
 }

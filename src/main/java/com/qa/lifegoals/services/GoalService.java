@@ -60,9 +60,9 @@ public class GoalService {
 	}
 
 	// DELETE
-	public boolean removeGoal(Long id) {
-		repo.deleteById(id);
-		boolean exists = this.repo.existsById(id);
+	public boolean removeGoal(Long goalId) {
+		repo.deleteById(goalId);
+		boolean exists = this.repo.existsById(goalId);
 		return !exists;
 	}
 }

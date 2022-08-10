@@ -52,8 +52,8 @@ public class GoalController {
 		return service.updateGoal(goalId, goal);
 	}
 
-	@DeleteMapping("/deleteGoal")
-	public boolean delete(@PathParam("goalId") Long goalId) {
+	@DeleteMapping("/deleteGoal/{goalId}")
+	public boolean delete(@PathVariable("goalId") Long goalId) {
 		return service.removeGoal(goalId);
 	}
 }
