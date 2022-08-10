@@ -2,8 +2,6 @@ package com.qa.lifegoals.controllers;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,8 +45,8 @@ public class GoalController {
 	 * >= 1) { return service.searchByName("a"); } else { return null; } }
 	 */
 
-	@PatchMapping("/updateGoal")
-	public Goal update(@PathParam("goalId") Long goalId, @RequestBody Goal goal) {
+	@PatchMapping("/updateGoal/{goalId}")
+	public Goal update(@PathVariable("goalId") Long goalId, @RequestBody Goal goal) {
 		return service.updateGoal(goalId, goal);
 	}
 

@@ -42,8 +42,10 @@
 
             let deleteButton = document.createElement("button");
             deleteButton.innerHTML = "Delete";
-            deleteButton.onclick = function () { deleteGoal(goals[i]).then(function() {getAllGoals()}) };
+            deleteButton.onclick = function () { deleteGoal(goals[i]).then(function () { getAllGoals() }) };
 
+            let editGoalButton = document.createElement("button");
+            editGoalButton.innerHTML = "Edit";
 
             let goalDescriptionBox = document.createElement("div");
             goalDescriptionBox.classList.add("goalDescriptionBox");
@@ -56,8 +58,12 @@
             let goalDesc = document.createElement("p");
             goalDesc.innerHTML = goals[i].goalDescription;
 
-            goalTitleBox.appendChild(goalTitle);
+
+            editGoalButton.onclick = function () { editGoal(goals[i], goalTitleBox, goalDescriptionBox, goalTitle, goalDesc, editGoalButton)};
+
             goalTitleBox.appendChild(deleteButton);
+            goalTitleBox.appendChild(editGoalButton);
+            goalTitleBox.appendChild(goalTitle);
             goalDescriptionBox.appendChild(goalDesc);
 
             goalBox.appendChild(goalTitleBox);
@@ -158,6 +164,50 @@
 
 
 
+    //UPDATE GOAL FUNCTIONS
+
+    editGoal = (goal, goalTitleBox, goalDescriptionBox, goalTitle, goalDescription, editGoalButton) => {
+
+        let titleEditor = document.createElement("input");
+        let descriptionEditor = document.createElement("input");
+
+
+        titleEditor.value = goalTitle.innerHTML;
+        goalTitleBox.removeChild(goalTitle);
+        goalTitleBox.appendChild(titleEditor);
+
+        descriptionEditor.value = goalDescription.innerHTML;
+        goalDescriptionBox.removeChild(goalDescription);
+        goalDescriptionBox.appendChild(descriptionEditor);
+
+        editGoalButton.innerHTML = "UPDATE";
+        editGoalButton.onclick = function () { updateGoal(goal, titleEditor.value, descriptionEditor.value).then(function () { getAllGoals() }) };
+    }
+
+
+
+
+
+    async function updateGoal(goal, name, description) {
+        let response = await fetch(`/updateGoal/${goal.goalId}`, {
+            method: "PATCH",
+            body: JSON.stringify(
+                {
+                    "goalName": `${name}`,
+                    "goalDescription": `${description}`
+                    //  "goal": goal
+                }
+            ),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(res => res.json().then(body => console.log(body)))
+            .catch(err => console.error(err + "WAGUAN"));
+
+        return response;
+    }
+
 
 
 
@@ -165,8 +215,7 @@
     //DELETE GOAL FUNCTIONS
 
     async function deleteGoal(goal) {
-        console.log("delete goal called", goal.goalId);
-        response = await fetch(`/deleteGoal/${goal.goalId}`, {
+        let response = await fetch(`/deleteGoal/${goal.goalId}`, {
             method: "DELETE"
         })
             .then(res => console.log(res))
@@ -174,6 +223,34 @@
 
         return response;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -207,14 +284,14 @@
             deleteButton.innerHTML = "Delete";
             deleteButton.onclick = function () { deleteTask(tasks[i]) };
 
-            let editButton = document.createElement("button");
-            editButton.innerHTML = "Edit";
+            let editTaskButton = document.createElement("button");
+            editTaskButton.innerHTML = "Edit";
 
             let taskTitleBox = document.createElement("div");
             taskTitleBox.classList.add("taskTitleBox");
             taskTitleBox.classList.add("centeredContent");
             taskTitleBox.appendChild(deleteButton);
-            taskTitleBox.appendChild(editButton);
+            taskTitleBox.appendChild(editTaskButton);
 
 
             let taskDescriptionBox = document.createElement("div");
@@ -229,8 +306,8 @@
             taskDesc.innerHTML = tasks[i].taskDescription;
 
 
-       
-            editButton.onclick = function () { editTask(tasks[i], taskBox, taskTitleBox, taskDescriptionBox, taskTitle, taskDesc, editButton)};
+
+            editTaskButton.onclick = function () { editTask(tasks[i], taskTitleBox, taskDescriptionBox, taskTitle, taskDesc, editTaskButton) };
 
 
             taskTitleBox.appendChild(taskTitle);
@@ -288,6 +365,29 @@
         fetchTasks(goal, tasksBox);
         console.log("Open Goal complete");
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -385,7 +485,7 @@
 
     //UPDATE TASK FUNCTIONS
 
-    editTask = (task, taskBox, taskTitleBox, taskDescriptionBox, taskTitle, taskDescription, editButton) => {
+    editTask = (task, taskTitleBox, taskDescriptionBox, taskTitle, taskDescription, editTaskButton) => {
 
         let titleEditor = document.createElement("input");
         let descriptionEditor = document.createElement("input");
@@ -399,33 +499,32 @@
         taskDescriptionBox.removeChild(taskDescription);
         taskDescriptionBox.appendChild(descriptionEditor);
 
-        editButton.innerHTML = "UPDATE";
-        editButton.onclick = function() {updateTask(task, taskBox, titleEditor.value, descriptionEditor.value)};
+        editTaskButton.innerHTML = "UPDATE";
+        editTaskButton.onclick = function () { updateTask(task, titleEditor.value, descriptionEditor.value) };
     }
 
 
 
 
 
-updateTask = (task, taskBox, name, description) => {
-    fetch(`/updateTask/${task.taskId}`, {
-        method: "PATCH",
-        body: JSON.stringify(
-            {
-                "taskName": `${name}`,
-                "taskDescription": `${description}`,
-              //  "goal": goal
+    updateTask = (task, name, description) => {
+        fetch(`/updateTask/${task.taskId}`, {
+            method: "PATCH",
+            body: JSON.stringify(
+                {
+                    "taskName": `${name}`,
+                    "taskDescription": `${description}`,
+                }
+            ),
+            headers: {
+                "Content-Type": "application/json"
             }
-        ),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-        .then(res => res.json().then(body => console.log(body)))
-        .catch(err => console.error(err + "WAGUAN"));
+        })
+            .then(res => res.json().then(body => console.log(body)))
+            .catch(err => console.error(err + "WAGUAN"));
 
         getAllGoals();
-}
+    }
 
 
 
