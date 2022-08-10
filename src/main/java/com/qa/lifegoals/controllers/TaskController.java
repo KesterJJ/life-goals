@@ -39,14 +39,14 @@ public class TaskController {
 	}
 
 	// READ
-	@GetMapping("/getAllTasks")
-	public List<TaskDTO> getAll() {
-		return this.service.getAllTasks();
+	@GetMapping("/getAllTasks/{goalId}")
+	public List<TaskDTO> getAll(@PathVariable("goalId") Long goalId) {
+		return this.service.getAllTasks(goalId);
 	}
 
 	@GetMapping("/getOneTask/{id}")
 	public Task getOne(@PathVariable("id") Long id) {
-		return service.getOneTask(id);
+		return service.getOneTask(1L);
 	}
 
 	/*

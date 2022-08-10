@@ -53,8 +53,8 @@ public class GoalService {
 		Optional<Goal> existenceCheckerOptional = this.repo.findById(id);
 		Goal existingGoal = existenceCheckerOptional.orElse(new Goal());
 
-		existingGoal.setName(goal.getName());
-		existingGoal.setDescription(goal.getDescription());
+		existingGoal.setGoalName(goal.getGoalName());
+		existingGoal.setGoalDescription(goal.getGoalDescription());
 
 		return this.repo.save(existingGoal);
 	}
