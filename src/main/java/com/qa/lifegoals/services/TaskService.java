@@ -31,8 +31,8 @@ public class TaskService {
 	}
 
 	// READ
-	public List<TaskDTO> getAllTasks() {
-		return repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
+	public List<TaskDTO> getAllTasks(Long goalId) {
+		return repo.findAllByGoalId(goalId).stream().map(this::mapToDTO).collect(Collectors.toList());
 	}
 
 	public Task getOneTask(Long id) {
@@ -54,16 +54,16 @@ public class TaskService {
 		Optional<Task> existenceCheckerOptional = this.repo.findById(id);
 		Task existingTask = existenceCheckerOptional.orElse(new Task());
 
-		existingTask.setName(task.getName());
-		existingTask.setDescription(task.getDescription());
+		existingTask.setTaskName(task.getTaskName());
+		existingTask.setTaskDescription(task.getTaskDescription());
 
 		return this.repo.save(existingTask);
 	}
 
 	// DELETE
-	public boolean removeTask(Long id) {
-		repo.deleteById(id);
-		boolean exists = this.repo.existsById(id);
+	public boolean removeTask(Long taskId) {
+		repo.deleteById(taskId);
+		boolean exists = this.repo.existsById(taskId);
 		return !exists;
 	}
 }

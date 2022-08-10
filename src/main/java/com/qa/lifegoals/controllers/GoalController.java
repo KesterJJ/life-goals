@@ -2,8 +2,6 @@ package com.qa.lifegoals.controllers;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,9 +32,9 @@ public class GoalController {
 		return this.service.getAllGoals();
 	}
 
-	@GetMapping("/getOneGoal/{id}")
-	public Goal getOne(@PathVariable("id") Long id) {
-		return service.getOneGoal(id);
+	@GetMapping("/getOneGoal/{goalId}")
+	public Goal getOne(@PathVariable("goalId") Long goalId) {
+		return service.getOneGoal(goalId);
 	}
 
 	/*
@@ -47,13 +45,13 @@ public class GoalController {
 	 * >= 1) { return service.searchByName("a"); } else { return null; } }
 	 */
 
-	@PatchMapping("/updateGoal")
-	public Goal update(@PathParam("id") Long id, @RequestBody Goal goal) {
-		return service.updateGoal(id, goal);
+	@PatchMapping("/updateGoal/{goalId}")
+	public Goal update(@PathVariable("goalId") Long goalId, @RequestBody Goal goal) {
+		return service.updateGoal(goalId, goal);
 	}
 
-	@DeleteMapping("/deleteGoal")
-	public boolean delete(@PathParam("id") Long id) {
-		return service.removeGoal(id);
+	@DeleteMapping("/deleteGoal/{goalId}")
+	public boolean delete(@PathVariable("goalId") Long goalId) {
+		return service.removeGoal(goalId);
 	}
 }

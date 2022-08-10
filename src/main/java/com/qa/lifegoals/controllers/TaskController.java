@@ -2,8 +2,6 @@ package com.qa.lifegoals.controllers;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,14 +37,14 @@ public class TaskController {
 	}
 
 	// READ
-	@GetMapping("/getAllTasks")
-	public List<TaskDTO> getAll() {
-		return this.service.getAllTasks();
+	@GetMapping("/getAllTasks/{goalId}")
+	public List<TaskDTO> getAll(@PathVariable("goalId") Long goalId) {
+		return this.service.getAllTasks(goalId);
 	}
 
 	@GetMapping("/getOneTask/{id}")
 	public Task getOne(@PathVariable("id") Long id) {
-		return service.getOneTask(id);
+		return service.getOneTask(1L);
 	}
 
 	/*
@@ -57,14 +55,14 @@ public class TaskController {
 	 * >= 1) { return service.searchByName("a"); } else { return null; } }
 	 */
 
-	@PatchMapping("/updateTask")
-	public Task update(@PathParam("id") Long id, @RequestBody Task task) {
-		return service.updateTask(id, task);
+	@PatchMapping("/updateTask/{taskId}")
+	public Task update(@PathVariable("taskId") Long taskId, @RequestBody Task task) {
+		return service.updateTask(taskId, task);
 	}
 
-	@DeleteMapping("/deleteTask")
-	public boolean delete(@PathParam("id") Long id) {
-		return service.removeTask(id);
+	@DeleteMapping("/deleteTask/{taskId}")
+	public boolean delete(@PathVariable("taskId") Long taskId) {
+		return service.removeTask(taskId);
 	}
 
 }

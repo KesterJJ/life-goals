@@ -53,16 +53,16 @@ public class GoalService {
 		Optional<Goal> existenceCheckerOptional = this.repo.findById(id);
 		Goal existingGoal = existenceCheckerOptional.orElse(new Goal());
 
-		existingGoal.setName(goal.getName());
-		existingGoal.setDescription(goal.getDescription());
+		existingGoal.setGoalName(goal.getGoalName());
+		existingGoal.setGoalDescription(goal.getGoalDescription());
 
 		return this.repo.save(existingGoal);
 	}
 
 	// DELETE
-	public boolean removeGoal(Long id) {
-		repo.deleteById(id);
-		boolean exists = this.repo.existsById(id);
+	public boolean removeGoal(Long goalId) {
+		repo.deleteById(goalId);
+		boolean exists = this.repo.existsById(goalId);
 		return !exists;
 	}
 }

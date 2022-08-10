@@ -16,19 +16,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Goal {
 
-	public Goal(String name, String description) {
-		this.name = name;
-		this.description = description;
+	public Goal(String goalName, String goalDescription) {
+		this.goalName = goalName;
+		this.goalDescription = goalDescription;
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long goalId;
 
 	@Column(nullable = false, unique = true)
-	private String name;
+	private String goalName;
 
 	@Column
-	private String description;
+	private String goalDescription;
 
 }
