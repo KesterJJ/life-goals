@@ -37,7 +37,7 @@ public class Task {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long taskId;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String taskName;
 
 	@Column

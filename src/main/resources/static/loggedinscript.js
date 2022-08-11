@@ -1,19 +1,68 @@
 (function () {
 
     console.log("Checking");
-    document.getElementById("greeting").innerHTML = "Hello, user!";
 
     const viewGoalsButton = document.getElementById("viewGoalsButton");
     viewGoalsButton.addEventListener("click", () => { getAllGoals(); });
     const CreateGoalButton = document.getElementById("createGoalButton");
     CreateGoalButton.addEventListener("click", () => { createCreateForm(); });
     const goalsBox = document.getElementById("goalsBox");
+    const greeting = document.getElementById("greeting");
+    const deleteUserButton = document.getElementById("deleteUserButton");
+
+
+
+
+    let user;
+
+
+
+
+//READ USER FUNCTIONS
+
+(async function () {
+console.log("read user called");
+const response = await fetch(`/search`, {
+    method: "GET"
+})
+    .then(res => res.json().then(body => {getLoggedInUser(body);
+        console.log(body);
+    }))
+    .catch(err => console.error(err + "WAGUAN"));
+return response;
+})();
+
+
+getLoggedInUser = (resp) => {
+user = resp;
+deleteUserButton.onclick = () => {deleteUser(user);};
+console.log(user);
+greetUser();
+}
+
+
+greetUser = () => {
+greeting.innerHTML = `Hello, ${user.endUserName}!`;
+}
 
 
 
 
 
+//DELETE USER        
 
+async function deleteUser(user) {
+console.log("delete user called", user.endUserId);
+        fetch(`/delete/${user.endUserId}`, {
+            method: "DELETE"
+        })
+           .then(res => {window.open("index.html", "_self")})
+            .catch(err => console.error(err + "WAGUAN"));
+
+        getAllGoals();
+
+
+    }
 
 
 
@@ -75,7 +124,7 @@
 
     getAllGoals = () => {
 
-        fetch("/getAllGoals", { method: "GET" })
+        fetch(`/getAllGoals/${user.endUserId}`, { method: "GET" })
             .then(res => res.json().then(body => createGoalBoxes(body)))
             .catch(err => console.error(err + "WAGUAN"));
     }
@@ -195,7 +244,6 @@
                 {
                     "goalName": `${name}`,
                     "goalDescription": `${description}`
-                    //  "goal": goal
                 }
             ),
             headers: {

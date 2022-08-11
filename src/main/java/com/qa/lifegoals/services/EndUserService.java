@@ -34,34 +34,26 @@ public class EndUserService {
 		return repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
 	}
 
-	public EndUser getOneEndUser(Long id) {
-		Optional<EndUser> existenceCheckerOptional = this.repo.findById(id);
-		EndUser existingEndUser = existenceCheckerOptional.orElseThrow();
-		return existingEndUser;
+	public EndUser searchByIsLoggedin(Boolean isTrue) {
+		return repo.findByIsLoggedin(isTrue);
 	}
 
-	/*
-	 * public List<EndUser> searchByName(String name) { return
-	 * repo.findEndUserBySearchName("a"); }
-	 * 
-	 * public List<EndUser> searchByDescription(String description) { return
-	 * repo.findEndUserBySearchDescription("a"); }
-	 */
-
 	// UPDATE
-	public EndUser updateEndUser(Long id, EndUser endUser) {
-		Optional<EndUser> existenceCheckerOptional = this.repo.findById(id);
+	public EndUser updateEndUser(String search, EndUser endUser) {
+		Optional<EndUser> existenceCheckerOptional = this.repo.findByEndUserName(search);
 		EndUser existingEndUser = existenceCheckerOptional.orElse(new EndUser());
+		System.out.println(this.repo.setOtherLoggedInToFalse(search));
 
-		existingEndUser.setName(endUser.getName());
+		System.out.println(endUser.getIsLoggedin());
+		existingEndUser.setIsLoggedin(endUser.getIsLoggedin());
 
 		return this.repo.save(existingEndUser);
 	}
 
 	// DELETE
-	public boolean removeEndUser(Long id) {
-		repo.deleteById(id);
-		boolean exists = this.repo.existsById(id);
+	public boolean removeEndUser(Long endUserId) {
+		repo.deleteById(endUserId);
+		boolean exists = this.repo.existsById(endUserId);
 		return !exists;
 	}
 }
