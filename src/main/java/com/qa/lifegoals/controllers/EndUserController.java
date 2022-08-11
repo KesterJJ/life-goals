@@ -34,26 +34,18 @@ public class EndUserController {
 		return this.service.getAllEndUsers();
 	}
 
-	@GetMapping("/getOne/{id}")
-	public EndUser getOne(@PathVariable("id") Long id) {
-		return service.getOneEndUser(id);
+	@GetMapping("/search")
+	public EndUser search() {
+		return service.searchByIsLoggedin(true);
 	}
 
-	/*
-	 * @GetMapping("/search") public List<EndUser> search(@PathParam("search")
-	 * String search) { if (service.searchByName("a").size() >= 1) { return
-	 * 
-	 * service.searchByName("a"); } else if (service.searchByDescription("a").size()
-	 * >= 1) { return service.searchByName("a"); } else { return null; } }
-	 */
-
-	@PatchMapping("/update")
-	public EndUser update(@PathParam("id") Long id, @RequestBody EndUser endUser) {
-		return service.updateEndUser(id, endUser);
+	@PatchMapping("/update/{search}")
+	public EndUser update(@PathVariable("search") String search, @RequestBody EndUser endUser) {
+		return service.updateEndUser(search, endUser);
 	}
 
-	@DeleteMapping("/delete")
-	public boolean delete(@PathParam("id") Long id) {
-		return service.removeEndUser(id);
+	@DeleteMapping("/delete/{endUserId}")
+	public boolean delete(@PathParam("endUserId") Long endUserId) {
+		return service.removeEndUser(endUserId);
 	}
 }

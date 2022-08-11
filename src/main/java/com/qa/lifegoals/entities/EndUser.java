@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.lang.NonNull;
 
@@ -18,17 +19,30 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EndUser {
 
-	public EndUser(String name) {
-		this.name = name;
+	public EndUser(String endUserName) {
+		this.endUserName = endUserName;
+	}
+
+	public EndUser(String endUserName, Boolean isLoggedin) {
+		this.endUserName = endUserName;
+		this.isLoggedin = isLoggedin;
+	}
+
+	public EndUser(Boolean isLoggedin) {
+		this.isLoggedin = isLoggedin;
 	}
 
 	@Id
 	@NonNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long endUserId;
 
 	@Column(nullable = false, unique = true)
-	@NonNull
-	private String name;
+	@NotNull
+	private String endUserName;
+
+	@Column(nullable = false)
+	@NotNull
+	private Boolean isLoggedin = false;
 
 }

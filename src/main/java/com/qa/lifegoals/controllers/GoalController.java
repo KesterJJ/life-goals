@@ -15,6 +15,11 @@ import com.qa.lifegoals.dtos.GoalDTO;
 import com.qa.lifegoals.entities.Goal;
 import com.qa.lifegoals.services.GoalService;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 @RestController
 public class GoalController {
 
@@ -27,9 +32,9 @@ public class GoalController {
 	}
 
 	// READ
-	@GetMapping("/getAllGoals")
-	public List<GoalDTO> getAll() {
-		return this.service.getAllGoals();
+	@GetMapping("/getAllGoals/{endUserId}")
+	public List<GoalDTO> getAll(@PathVariable("endUserId") Long endUserId) {
+		return this.service.getAllGoals(endUserId);
 	}
 
 	@GetMapping("/getOneGoal/{goalId}")

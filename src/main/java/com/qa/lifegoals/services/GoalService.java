@@ -30,8 +30,8 @@ public class GoalService {
 	}
 
 	// READ
-	public List<GoalDTO> getAllGoals() {
-		return repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
+	public List<GoalDTO> getAllGoals(Long endUserId) {
+		return repo.findAllByEndUserId(endUserId).stream().map(this::mapToDTO).collect(Collectors.toList());
 	}
 
 	public Goal getOneGoal(Long id) {

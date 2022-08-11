@@ -1,19 +1,46 @@
 (function () {
 
     console.log("Checking");
-    document.getElementById("greeting").innerHTML = "Hello, user!";
 
     const viewGoalsButton = document.getElementById("viewGoalsButton");
     viewGoalsButton.addEventListener("click", () => { getAllGoals(); });
     const CreateGoalButton = document.getElementById("createGoalButton");
     CreateGoalButton.addEventListener("click", () => { createCreateForm(); });
     const goalsBox = document.getElementById("goalsBox");
+    const greeting = document.getElementById("greeting");
 
 
 
 
+    let user;
 
 
+
+
+//READ USER FUNCTIONS
+
+(async function () {
+console.log("read user called");
+const response = await fetch(`/search`, {
+    method: "GET"
+})
+    .then(res => res.json().then(body => {getLoggedInUser(body);
+        console.log(body);
+    }))
+    .catch(err => console.error(err + "WAGUAN"));
+return response;
+})();
+
+
+getLoggedInUser = (resp) => {
+user = resp;
+greetUser();
+}
+
+
+greetUser = () => {
+greeting.innerHTML = `Hello, ${user.endUserName}!`;
+}
 
 
 
@@ -75,7 +102,7 @@
 
     getAllGoals = () => {
 
-        fetch("/getAllGoals", { method: "GET" })
+        fetch(`/getAllGoals/${user.endUserId}`, { method: "GET" })
             .then(res => res.json().then(body => createGoalBoxes(body)))
             .catch(err => console.error(err + "WAGUAN"));
     }
@@ -195,7 +222,6 @@
                 {
                     "goalName": `${name}`,
                     "goalDescription": `${description}`
-                    //  "goal": goal
                 }
             ),
             headers: {

@@ -11,14 +11,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EndUserDTO {
 
-	private Long id;
+	private Long endUserId;
 
-	private String name;
+	private String endUserName;
 
-	private String description;
+	private Boolean isLoggedin;
 
 	public EndUserDTO(EndUser endUser) {
-		this.id = endUser.getId();
-		this.name = endUser.getName();
+		this.endUserId = endUser.getEndUserId();
+		this.endUserName = endUser.getEndUserName();
+		this.isLoggedin = endUser.getIsLoggedin();
 	}
 }
