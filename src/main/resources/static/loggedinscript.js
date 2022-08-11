@@ -177,7 +177,7 @@ console.log("delete user called", user.endUserId);
         submitButton.setAttribute("type", "submit");
         submitButton.setAttribute("value", "Submit");
         submitButton.innerHTML = "Create";
-        submitButton.onclick = function () { createGoal(title.value, description.value) };
+        submitButton.onclick = function () { createGoal(title.value, description.value, user) };
 
         form.appendChild(titleLabel)
         form.appendChild(title);
@@ -192,14 +192,15 @@ console.log("delete user called", user.endUserId);
 
     }
 
-    createGoal = (name, description) => {
-        console.log('create Goal called');
+    createGoal = (name, description, user) => {
+        console.log('create Goal called', user.endUserId);
         fetch("/createGoal", {
             method: "POST",
             body: JSON.stringify(
                 {
                     "goalName": `${name}`,
-                    "goalDescription": `${description}`
+                    "goalDescription": `${description}`,
+                    "endUser": user
                 }
             ),
             headers: {
@@ -495,8 +496,6 @@ console.log("delete user called", user.endUserId);
 
 
     createTask = (name, description, goal) => {
-
-
         console.log(JSON.stringify(goal));
         fetch("/createTask", {
             method: "POST",
