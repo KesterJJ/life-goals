@@ -44,7 +44,6 @@ public class EndUserService {
 		EndUser existingEndUser = existenceCheckerOptional.orElse(new EndUser());
 		System.out.println(this.repo.setOtherLoggedInToFalse(search));
 
-		System.out.println(endUser.getIsLoggedin());
 		existingEndUser.setIsLoggedin(endUser.getIsLoggedin());
 
 		return this.repo.save(existingEndUser);
