@@ -8,6 +8,7 @@
     CreateGoalButton.addEventListener("click", () => { createCreateForm(); });
     const goalsBox = document.getElementById("goalsBox");
     const greeting = document.getElementById("greeting");
+    const deleteUserButton = document.getElementById("deleteUserButton");
 
 
 
@@ -34,6 +35,8 @@ return response;
 
 getLoggedInUser = (resp) => {
 user = resp;
+deleteUserButton.onclick = () => {deleteUser(user);};
+console.log(user);
 greetUser();
 }
 
@@ -41,6 +44,25 @@ greetUser();
 greetUser = () => {
 greeting.innerHTML = `Hello, ${user.endUserName}!`;
 }
+
+
+
+
+
+//DELETE USER        
+
+async function deleteUser(user) {
+console.log("delete user called", user.endUserId);
+        fetch(`/delete/${user.endUserId}`, {
+            method: "DELETE"
+        })
+           .then(res => {window.open("index.html", "_self")})
+            .catch(err => console.error(err + "WAGUAN"));
+
+        getAllGoals();
+
+
+    }
 
 
 
