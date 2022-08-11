@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -37,14 +36,13 @@ public class Goal {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long goalId;
 
-	@Column(nullable = false)
+	@Column
 	private String goalName;
 
 	@Column
 	private String goalDescription;
 
 	@ManyToOne
-	@NotNull
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "end_user_id")
 	private EndUser endUser;
