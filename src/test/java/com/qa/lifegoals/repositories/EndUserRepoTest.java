@@ -42,8 +42,8 @@ public class EndUserRepoTest {
 
 	@Test
 	public void testFindByEndUserName() {
-		String search = "user2";
-		EndUser endUser = new EndUser(2L, "user2", true);
+		String search = "user1";
+		EndUser endUser = new EndUser(1L, "user1", false);
 		Optional<EndUser> expected = Optional.of(endUser);
 
 		Assertions.assertEquals(repo.findByEndUserName(search), expected);

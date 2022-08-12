@@ -5,9 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-
-import org.springframework.lang.NonNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,16 +30,13 @@ public class EndUser {
 	}
 
 	@Id
-	@NonNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long endUserId;
 
-	@Column(nullable = false, unique = true)
-	@NotNull
+	@Column(unique = true)
 	private String endUserName;
 
-	@Column(nullable = false)
-	@NotNull
+	@Column
 	private Boolean isLoggedin = false;
 
 }

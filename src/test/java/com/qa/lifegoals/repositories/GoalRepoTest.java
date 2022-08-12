@@ -26,7 +26,7 @@ public class GoalRepoTest {
 
 	@Test
 	public void testFindAllByEndUserId() {
-		EndUser user2 = new EndUser(2L, "user2", false);
+		EndUser user2 = new EndUser(2L, "user2", true);
 		Goal goal = new Goal(3L, "goal3", "user2", user2);
 		Long user2Id = 2L;
 		List<Goal> expected = List.of(goal);

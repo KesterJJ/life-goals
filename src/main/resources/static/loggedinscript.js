@@ -177,7 +177,7 @@ console.log("delete user called", user.endUserId);
         submitButton.setAttribute("type", "submit");
         submitButton.setAttribute("value", "Submit");
         submitButton.innerHTML = "Create";
-        submitButton.onclick = function () { createGoal(title.value, description.value, user) };
+        submitButton.onclick = function () { createGoal(title.value, description.value, user, newGoalBox) };
 
         form.appendChild(titleLabel)
         form.appendChild(title);
@@ -192,7 +192,7 @@ console.log("delete user called", user.endUserId);
 
     }
 
-    createGoal = (name, description, user) => {
+    createGoal = (name, description, user, newGoalBox) => {
         console.log('create Goal called', user.endUserId);
         fetch("/createGoal", {
             method: "POST",
@@ -207,7 +207,7 @@ console.log("delete user called", user.endUserId);
                 "Content-Type": "application/json"
             }
         })
-            .then(res => res.json().then(body => console.log(body)))
+            .then(res => res.json().then(body => {newGoalBox.remove();}))
             .catch(err => console.error(err + "WAGUAN"));
     }
 
@@ -480,7 +480,7 @@ console.log("delete user called", user.endUserId);
         submitButton.setAttribute("type", "submit");
         submitButton.setAttribute("value", "Submit");
         submitButton.innerHTML = "Create";
-        submitButton.onclick = function () { createTask(title.value, description.value, goal) };
+        submitButton.onclick = function () { createTask(title.value, description.value, goal, newTaskBox) };
 
         form.appendChild(titleLabel)
         form.appendChild(title);
@@ -495,7 +495,7 @@ console.log("delete user called", user.endUserId);
     }
 
 
-    createTask = (name, description, goal) => {
+    createTask = (name, description, goal, newTaskBox) => {
         console.log(JSON.stringify(goal));
         fetch("/createTask", {
             method: "POST",
@@ -510,7 +510,7 @@ console.log("delete user called", user.endUserId);
                 "Content-Type": "application/json"
             }
         })
-            .then(res => res.json().then(body => console.log(body)))
+            .then(res => res.json().then(body => {newTaskBox.remove()}))
             .catch(err => console.error(err + "WAGUAN"));
 
         getAllGoals();

@@ -26,11 +26,6 @@ public class TaskController {
 	@Autowired
 	private TaskService service;
 
-	@GetMapping("/")
-	public String home() {
-		return "<h2>HI</h2>";
-	}
-
 	@PostMapping("/createTask")
 	public Task create(@RequestBody Task task) {
 		return service.addTask(task);

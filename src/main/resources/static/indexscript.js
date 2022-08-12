@@ -3,7 +3,7 @@
 
 const input = document.querySelector("input");
 const logInButton = document.querySelector("#loginButton");
-logInButton.addEventListener("click", function () {openLoggedInPage()});
+logInButton.addEventListener("click", function () {login()});
 
 
 //CREATE USER FUNCTION
@@ -43,18 +43,21 @@ async function login() {
             "Content-Type": "application/json"
         }
     })
-        .then(res => res.json().then(body => {console.log(body);}))
+        .then(res => res.json().then(body => {
+            if (body.endUserName == input.value) {
+                window.open("loggedIn.html", "_self")
+        };}))
         .catch(err => console.error(err + "WAGUAN"));
         console.log(response, "login");
     return response;
 }
 
 
-
+/*
 async function openLoggedInPage() {
 
-   await login().then(res => {window.open("loggedIn.html", "_self")});
+   await login().then(res => {})});
 
-}
+}*/
 
 })();
