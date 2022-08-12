@@ -3,16 +3,10 @@ package frontend;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class WebDriverFactory {
 
-	WebDriverManager.chromedriver().setup();System.setProperty("webdriver.chrome.driver","/Documents/chromedriver");
-	ChromeDriver driver = new ChromeDriver();
-
 	public static WebDriver getDriver() throws Exception {
-		// get the value of a property called "browser", or default to "chrome" if
-		// unavailable
 		String webDriver = System.getProperty("browser", "chrome");
 
 		switch (webDriver.toUpperCase()) {

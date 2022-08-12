@@ -1,5 +1,9 @@
 package frontend;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -9,14 +13,19 @@ public class LoginTest {
 	
 	WebDriverManager.chromedriver().setup();
 	
-	ChromeDriver driver = new ChromeDriver();
+	ChromeDriver cDriver = new ChromeDriver();
 	
-    private WebDriver driver;
+    private WebDriver driver2;
 
     @Before
     public void setup() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        driver = new ChromeDriver();
+        cDriver = new ChromeDriver();
+    }
+    
+    @Before
+    public void setup2() {
+        driver2 = WebDriverFactory.getDriver();
     }
 
     @Test
@@ -26,6 +35,11 @@ public class LoginTest {
 
     @After
     public void tearDown() {
-        driver.quit();
+        cDriver.quit();
     }
-}}
+    
+    @After
+    public void tearDown2() {
+        driver2.quit();
+    }
+}
