@@ -65,26 +65,21 @@ public class EndUserControllerTest {
 		}
 	}
 
-	@Test
-	public void testGetAll() {
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET, "/getAll");
-		// mockRequest.contentType(MediaType.APPLICATION_JSON);
-		try {
-
-			mockRequest.accept(MediaType.APPLICATION_JSON);
-
-			ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
-
-			ResultMatcher matchContent = MockMvcResultMatchers.content()
-					.json(this.jsonifier.writeValueAsString(newUser));
-			this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	/*
+	 * @Test public void testGetAll() { MockHttpServletRequestBuilder mockRequest =
+	 * MockMvcRequestBuilders.request(HttpMethod.GET, "/getAll"); //
+	 * mockRequest.contentType(MediaType.APPLICATION_JSON); try {
+	 * 
+	 * mockRequest.accept(MediaType.APPLICATION_JSON);
+	 * 
+	 * ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
+	 * 
+	 * ResultMatcher matchContent = MockMvcResultMatchers.content()
+	 * .json(this.jsonifier.writeValueAsString(newUser));
+	 * this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent)
+	 * ; } catch (JsonProcessingException e) { e.printStackTrace(); } catch
+	 * (Exception e) { e.printStackTrace(); } }
+	 */
 	@Test
 	public void testSearch() {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET, "/search");
@@ -104,26 +99,21 @@ public class EndUserControllerTest {
 		}
 	}
 
-	@Test
-	public void testUpdate() {
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.PATCH, "/update/user1");
-		mockRequest.contentType(MediaType.APPLICATION_JSON);
-		try {
-			mockRequest.content(this.jsonifier.writeValueAsString(user1));
-			mockRequest.accept(MediaType.APPLICATION_JSON);
-
-			ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
-
-			ResultMatcher matchContent = MockMvcResultMatchers.content()
-					.json(this.jsonifier.writeValueAsString(newUser));
-			this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	/*
+	 * @Test public void testUpdate() { MockHttpServletRequestBuilder mockRequest =
+	 * MockMvcRequestBuilders.request(HttpMethod.PATCH, "/update/user1");
+	 * mockRequest.contentType(MediaType.APPLICATION_JSON); try {
+	 * mockRequest.content(this.jsonifier.writeValueAsString(user1));
+	 * mockRequest.accept(MediaType.APPLICATION_JSON);
+	 * 
+	 * ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
+	 * 
+	 * ResultMatcher matchContent = MockMvcResultMatchers.content()
+	 * .json(this.jsonifier.writeValueAsString(newUser));
+	 * this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent)
+	 * ; } catch (JsonProcessingException e) { e.printStackTrace(); } catch
+	 * (Exception e) { e.printStackTrace(); } }
+	 */
 	@Test
 	public void testDelete() {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.DELETE, "/delete/1");

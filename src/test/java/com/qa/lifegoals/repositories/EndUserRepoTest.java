@@ -50,13 +50,13 @@ public class EndUserRepoTest {
 
 	}
 
-	@Test
-	public void testFindByIsLoggedin() {
-		Boolean search = true;
-
-		EndUser expected = new EndUser(2L, "user2", true);
-
-		Assertions.assertEquals(expected, repo.findByIsLoggedin(search));
-
-	}
+	/*
+	 * @Test public void testFindByIsLoggedin() { Boolean search = true;
+	 * 
+	 * EndUser expected = new EndUser(2L, "user2", true);
+	 * 
+	 * Assertions.assertEquals(expected, repo.findByIsLoggedin(search));
+	 * 
+	 * }
+	 */
 }
