@@ -1,7 +1,5 @@
 package com.qa.lifegoals.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qa.lifegoals.dtos.EndUserDTO;
 import com.qa.lifegoals.entities.EndUser;
 import com.qa.lifegoals.services.EndUserService;
 
@@ -27,10 +24,6 @@ public class EndUserController {
 	}
 
 	// READ
-	@GetMapping("/getAll")
-	public List<EndUserDTO> getAll() {
-		return this.service.getAllEndUsers();
-	}
 
 	@GetMapping("/search")
 	public EndUser search() {
