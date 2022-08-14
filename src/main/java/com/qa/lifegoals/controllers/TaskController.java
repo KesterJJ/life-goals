@@ -26,11 +26,6 @@ public class TaskController {
 	@Autowired
 	private TaskService service;
 
-	@GetMapping("/")
-	public String home() {
-		return "<h2>HI</h2>";
-	}
-
 	@PostMapping("/createTask")
 	public Task create(@RequestBody Task task) {
 		return service.addTask(task);
@@ -41,19 +36,6 @@ public class TaskController {
 	public List<TaskDTO> getAll(@PathVariable("goalId") Long goalId) {
 		return this.service.getAllTasks(goalId);
 	}
-
-	@GetMapping("/getOneTask/{id}")
-	public Task getOne(@PathVariable("id") Long id) {
-		return service.getOneTask(1L);
-	}
-
-	/*
-	 * @GetMapping("/search") public List<Task> search(@PathParam("search") String
-	 * search) { if (service.searchByName("a").size() >= 1) { return
-	 * 
-	 * service.searchByName("a"); } else if (service.searchByDescription("a").size()
-	 * >= 1) { return service.searchByName("a"); } else { return null; } }
-	 */
 
 	@PatchMapping("/updateTask/{taskId}")
 	public Task update(@PathVariable("taskId") Long taskId, @RequestBody Task task) {

@@ -1,8 +1,6 @@
 package com.qa.lifegoals.services;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +28,6 @@ public class EndUserService {
 	}
 
 	// READ
-	public List<EndUserDTO> getAllEndUsers() {
-		return repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
-	}
-
 	public EndUser searchByIsLoggedin(Boolean isTrue) {
 		return repo.findByIsLoggedin(isTrue);
 	}
@@ -44,7 +38,6 @@ public class EndUserService {
 		EndUser existingEndUser = existenceCheckerOptional.orElse(new EndUser());
 		System.out.println(this.repo.setOtherLoggedInToFalse(search));
 
-		System.out.println(endUser.getIsLoggedin());
 		existingEndUser.setIsLoggedin(endUser.getIsLoggedin());
 
 		return this.repo.save(existingEndUser);

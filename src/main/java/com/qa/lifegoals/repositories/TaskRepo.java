@@ -9,17 +9,7 @@ import com.qa.lifegoals.entities.Task;
 
 public interface TaskRepo extends JpaRepository<Task, Long> {
 
-	List<Task> findTaskByTaskName(String taskName);
-
-	List<Task> findTaskByTaskDescription(String taskDescription);
-
 	@Query(value = "SELECT * FROM TASK WHERE goal_id = ?1", nativeQuery = true)
 	List<Task> findAllByGoalId(Long goalId);
-
-	@Query(value = "SELECT * FROM TASK WHERE name = 'Say Hello';", nativeQuery = true)
-	List<Task> findTaskBySearchName(String search);
-
-	@Query(value = "SELECT * FROM task WHERE name = 'Say Hello';", nativeQuery = true)
-	List<Task> findTaskBySearchDescription(String search);
 
 }
