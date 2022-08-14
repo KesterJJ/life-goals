@@ -37,19 +37,6 @@ public class TaskController {
 		return this.service.getAllTasks(goalId);
 	}
 
-	@GetMapping("/getOneTask/{id}")
-	public Task getOne(@PathVariable("id") Long id) {
-		return service.getOneTask(1L);
-	}
-
-	/*
-	 * @GetMapping("/search") public List<Task> search(@PathParam("search") String
-	 * search) { if (service.searchByName("a").size() >= 1) { return
-	 * 
-	 * service.searchByName("a"); } else if (service.searchByDescription("a").size()
-	 * >= 1) { return service.searchByName("a"); } else { return null; } }
-	 */
-
 	@PatchMapping("/updateTask/{taskId}")
 	public Task update(@PathVariable("taskId") Long taskId, @RequestBody Task task) {
 		return service.updateTask(taskId, task);

@@ -20,7 +20,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qa.lifegoals.dtos.TaskDTO;
 import com.qa.lifegoals.entities.EndUser;
 import com.qa.lifegoals.entities.Goal;
 import com.qa.lifegoals.entities.Task;
@@ -38,10 +37,6 @@ public class TaskControllerTest {
 
 	@Autowired
 	private ObjectMapper jsonifier;
-
-	private TaskDTO mapToDTO(Task task) {
-		return mapper.map(task, TaskDTO.class);
-	}
 
 	private final EndUser user1 = new EndUser(1L, "user1", false);
 
@@ -74,25 +69,26 @@ public class TaskControllerTest {
 		}
 	}
 
-	@Test
-	public void testGetAllTasks() {
-		/*
-		 * MockHttpServletRequestBuilder mockRequest =
-		 * MockMvcRequestBuilders.request(HttpMethod.GET, "/getAllTasks/2"); //
-		 * mockRequest.contentType(MediaType.APPLICATION_JSON); try {
-		 * 
-		 * mockRequest.accept(MediaType.APPLICATION_JSON);
-		 * 
-		 * ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
-		 * 
-		 * ResultMatcher matchContent =
-		 * MockMvcResultMatchers.content().json(this.jsonifier.writeValueAsString(task2)
-		 * );
-		 * this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent)
-		 * ; } catch (JsonProcessingException e) { e.printStackTrace(); } catch
-		 * (Exception e) { e.printStackTrace(); }
-		 */
-	}
+	/*
+	 * @Test public void testGetAllTasks() {
+	 * 
+	 * MockHttpServletRequestBuilder mockRequest =
+	 * MockMvcRequestBuilders.request(HttpMethod.GET, "/getAllTasks/2"); //
+	 * mockRequest.contentType(MediaType.APPLICATION_JSON); try {
+	 * 
+	 * mockRequest.accept(MediaType.APPLICATION_JSON);
+	 * 
+	 * ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
+	 * 
+	 * ResultMatcher matchContent =
+	 * MockMvcResultMatchers.content().json(this.jsonifier.writeValueAsString(task2)
+	 * );
+	 * this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent)
+	 * ; } catch (JsonProcessingException e) { e.printStackTrace(); } catch
+	 * (Exception e) { e.printStackTrace(); }
+	 * 
+	 * }
+	 */
 
 	@Test
 	public void create() {
@@ -104,25 +100,6 @@ public class TaskControllerTest {
 					.andExpect((ResultMatcher) content().json(this.jsonifier.writeValueAsString(newTask)));
 		} catch (Exception e) {
 			System.out.println(e);
-		}
-	}
-
-	@Test
-	public void testGetOneTask() {
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET, "/getOneTask/1");
-		// mockRequest.contentType(MediaType.APPLICATION_JSON);
-		try {
-
-			mockRequest.accept(MediaType.APPLICATION_JSON);
-
-			ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
-
-			ResultMatcher matchContent = MockMvcResultMatchers.content().json(this.jsonifier.writeValueAsString(task1));
-			this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchContent);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 

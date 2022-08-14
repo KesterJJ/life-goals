@@ -34,20 +34,6 @@ public class GoalService {
 		return repo.findAllByEndUserId(endUserId).stream().map(this::mapToDTO).collect(Collectors.toList());
 	}
 
-	public Goal getOneGoal(Long id) {
-		Optional<Goal> existenceCheckerOptional = this.repo.findById(id);
-		Goal existingGoal = existenceCheckerOptional.orElseThrow();
-		return existingGoal;
-	}
-
-	/*
-	 * public List<Goal> searchByName(String name) { return
-	 * repo.findGoalBySearchName("a"); }
-	 * 
-	 * public List<Goal> searchByDescription(String description) { return
-	 * repo.findGoalBySearchDescription("a"); }
-	 */
-
 	// UPDATE
 	public Goal updateGoal(Long id, Goal goal) {
 		Optional<Goal> existenceCheckerOptional = this.repo.findById(id);

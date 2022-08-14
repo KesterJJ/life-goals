@@ -67,20 +67,6 @@ public class GoalServiceTest {
 		;
 	}
 
-	@Test
-	public void testGetOneGoal() {
-		EndUser user1 = new EndUser("user1", false);
-
-		Goal expected = new Goal(1L, "goal1", "user1", user1);
-		Long goalId = 1L;
-
-		Mockito.when(repo.findById(goalId)).thenReturn(Optional.of(expected));
-
-		Assertions.assertEquals(service.getOneGoal(1L), expected);
-
-		Mockito.verify(this.repo, Mockito.times(1)).findById(goalId);
-	}
-
 	// UPDATE TEST
 
 	@Test

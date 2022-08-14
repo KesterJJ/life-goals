@@ -1,5 +1,7 @@
-Coverage: 70.9%
+Coverage: 69.4%
 # Life Goals
+
+IMPORTANT!: THIS APP IS NOT SECURE. DO NOT USE IT TO STORE SENSITIVE INFORMATION.
 
 This is a simple CRUD Application used to manage your life goals. It allows a user to connect to a database through a web page and create, read, update, and delete data. It has 3 types of stored data that can be managed. These are users, life goals, and tasks. A life goal belongs to a user and tasks belong to a goal. When you first open the App, it will be on the login page. There you can create a new user or log in. You can then add, remove, or edit life goals with descriptions using the buttons. Click on a life goal to create a task needed to achieve it. These can also be created, edited and deleted.
 
@@ -48,12 +50,12 @@ Maven: Download: https://maven.apache.org/download.cgi
 
 ### Installing
 
-Once you have installed the dependencies, you can install the application simply by downloading the file located in "target" folder in this repository, called "lifegoals-0.0.1-jar-with-dependencies.jar". Store this anywhere you like in your file system.
+Once you have installed the dependencies, you can install the application simply by downloading the file located in "target" folder in this repository, called "QaSpring-0.0.1-SNAPSHOT.jar". Store this anywhere you like in your file system.
 
 
 ## How to use the application
 
-To open the app, open your command line and navigate to the folder containing the file you downloaded for the installation. Then enter the command: java -jar .\QaSpring-0.0.1-jar-with-dependencies.jar
+To open the app, open your command line and navigate to the folder containing the file you downloaded for the installation. Then enter the command: java -jar .\QaSpring-0.0.1-SNAPSHOT.jar
 Hit 'Enter'. The application will start in your command line.
 
 When the application is launched(You will be able to tell because your command line will say "Hi"), you will need to open your web browser(Preferably Google Chrome). It the search bar at the top, type in: 

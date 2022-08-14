@@ -1,6 +1,5 @@
 package com.qa.lifegoals.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -13,7 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.qa.lifegoals.LifeGoalsApplication;
 import com.qa.lifegoals.config.Config;
-import com.qa.lifegoals.dtos.EndUserDTO;
 import com.qa.lifegoals.entities.EndUser;
 import com.qa.lifegoals.repositories.EndUserRepo;
 
@@ -39,27 +37,7 @@ public class EndUserServiceTest {
 		Mockito.verify(this.repo, Mockito.times(1)).save(endUser);
 	}
 
-	// READ TESTS
-
-	@Test
-	public void testGetAllEndUsers() {
-		EndUser endUser1 = new EndUser(1L, "user1", false);
-		EndUser endUser2 = new EndUser(2L, "user2", false);
-
-		List<EndUser> EndUsers = List.of(endUser1, endUser2);
-
-		List<EndUserDTO> EndUserDTOs = List.of(
-				new EndUserDTO(endUser1.getEndUserId(), endUser1.getEndUserName(), endUser1.getIsLoggedin()),
-				new EndUserDTO(endUser2.getEndUserId(), endUser2.getEndUserName(), endUser2.getIsLoggedin()));
-
-		Mockito.when(repo.findAll()).thenReturn(EndUsers);
-
-		Assertions.assertEquals(service.getAllEndUsers(), EndUserDTOs);
-
-		Mockito.verify(this.repo, Mockito.times(1)).findAll();
-		;
-	}
-
+	// READ TEST
 	@Test
 	public void testSearchByIsLoggedIn() {
 		EndUser expected = new EndUser(1L, "user1", true);

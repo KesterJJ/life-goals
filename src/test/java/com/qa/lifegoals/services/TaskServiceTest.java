@@ -65,20 +65,6 @@ public class TaskServiceTest {
 		;
 	}
 
-	@Test
-	public void testGetOneTask() {
-		Goal goal1 = new Goal("goal1", "user1");
-
-		Task expected = new Task(1L, "1ask1", "goal1", goal1);
-		Long taskId = 1L;
-
-		Mockito.when(repo.findById(taskId)).thenReturn(Optional.of(expected));
-
-		Assertions.assertEquals(service.getOneTask(1L), expected);
-
-		Mockito.verify(this.repo, Mockito.times(1)).findById(taskId);
-	}
-
 	// UPDATE TEST
 
 	@Test

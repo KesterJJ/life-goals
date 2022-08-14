@@ -35,20 +35,6 @@ public class TaskService {
 		return repo.findAllByGoalId(goalId).stream().map(this::mapToDTO).collect(Collectors.toList());
 	}
 
-	public Task getOneTask(Long id) {
-		Optional<Task> existenceCheckerOptional = this.repo.findById(id);
-		Task existingTask = existenceCheckerOptional.orElseThrow();
-		return existingTask;
-	}
-
-	/*
-	 * public List<Task> searchByName(String name) { return
-	 * repo.findTaskBySearchName("a"); }
-	 * 
-	 * public List<Task> searchByDescription(String description) { return
-	 * repo.findTaskBySearchDescription("a"); }
-	 */
-
 	// UPDATE
 	public Task updateTask(Long id, Task task) {
 		Optional<Task> existenceCheckerOptional = this.repo.findById(id);

@@ -37,19 +37,6 @@ public class GoalController {
 		return this.service.getAllGoals(endUserId);
 	}
 
-	@GetMapping("/getOneGoal/{goalId}")
-	public Goal getOne(@PathVariable("goalId") Long goalId) {
-		return service.getOneGoal(goalId);
-	}
-
-	/*
-	 * @GetMapping("/search") public List<Goal> search(@PathParam("search") String
-	 * search) { if (service.searchByName("a").size() >= 1) { return
-	 * 
-	 * service.searchByName("a"); } else if (service.searchByDescription("a").size()
-	 * >= 1) { return service.searchByName("a"); } else { return null; } }
-	 */
-
 	@PatchMapping("/updateGoal/{goalId}")
 	public Goal update(@PathVariable("goalId") Long goalId, @RequestBody Goal goal) {
 		return service.updateGoal(goalId, goal);
